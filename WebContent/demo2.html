@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title></title>
+    </head>
+ 
+    <body>
+        <div class="container">
+        用户名: <br>
+        <input type="text" name="username" id="snum">
+        <br>
+        密码: <br>
+        <input type="password" name="password" id="password">
+        <br><br>
+        <input type="submit" value="登陆" onclick="getDate()">
+        </div>
+ 
+        <script src="js/jquery-1.12.3.min.js"></script>
+        <script type="text/javascript">
+
+
+        function getDate() {
+            var postData = {
+            snum : $("#snum").val(),
+            password : $("#password").val(),
+        
+        }
+
+
+           var temp = '';
+            $.ajax({
+                type: "post",
+                url: "http://localhost:9080/StudentManage/login",
+                data:postData,
+                dataType: "json",
+                success: function(res) {
+                    var list = res.result
+                    console.log(list);
+                    console.log(postData)
+                    if(list==1){
+                        alert("登录成功");
+                    }
+                    else if(list==2){
+                        alert("密码错误");
+                    }
+                }
+            });
+        }
+
+        </script>
+    </body>
+</html>
+
+
+
+    

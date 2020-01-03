@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+    <mapper namespace="com.wkc.dao.UserDao">
+        <select id="login" parameterType="Integer" resultType="User">
+            select * from student_ where snum = #{snum} 
+        </select>
+        
+        <select id="listAllUser" resultType="User">
+            select * from student_ where role=0
+        </select>
+        
+        <insert id="addUser" parameterType="User">
+            insert into student_ values(null,#{name},#{snum},#{password},#{sex},#{birth},#{city})
+        </insert>
+        
+        <insert id="register" parameterType="User">
+            insert into student_ values(null,null,#{snum},#{password},null,null,null,0)
+        </insert>
+        
+        <select id="findUserById" parameterType="Integer" resultType="User">
+            select * from student_ where id = #{id}
+        </select>
+        
+        <update id="updateUser" parameterType="User">
+            update student_ set name=#{name},snum=#{snum},password=#{password},sex=#{sex},birth=#{birth},city=#{city},role=0 where id=#{id}
+        </update>
+        
+        
+        <delete id="deleteUser" parameterType="User">
+            delete from student_ where id=#{id}
+        </delete>
+        
+        <select id="findUserBySnum" parameterType="Integer" resultType="User">
+            select * from student_ where snum = #{snum}
+        </select>
+        
+        <select id="isAdmin" parameterType="String" resultType="User">
+            select role from student_ where snum= #{snum}
+        </select>
+        
+        
+        
+        
+    </mapper>

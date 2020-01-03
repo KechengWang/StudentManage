@@ -1,0 +1,83 @@
+
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+<meta charset="UTF-8">
+<title> Login Form</title>
+<script src="js/jquery-1.12.3.min.js"></script>
+<link rel="stylesheet" href="js/style.css">
+
+</head>
+<body>
+
+<form method="get" action="javascript: void(0);" id="login-form" class="login-form" autocomplete="off" role="main">
+  <h1 class="a11y-hidden">登录表单</h1>
+  <div>
+    <label class="label-email">
+      <input type="text" class="text" name="email" id="snum" placeholder="学号" tabindex="1" required />
+      <span class="required">学号</span>
+    </label>
+  </div>
+  <div>
+    <label class="label-password">
+      <input type="password" class="text" name="password" id="password" placeholder="密码" tabindex="2" required />
+      <span class="required">密码</span>
+    </label>
+  </div>
+  <input type="submit" value="登录" onclick="getDate()" />
+  <figure aria-hidden="true">
+    <div class="person-body"></div>
+    <div class="neck skin"></div>
+    <div class="head skin">
+      <div class="eyes"></div>
+      <div class="mouth"></div>
+    </div>
+    <div class="hair"></div>
+    <div class="ears"></div>
+    <div class="shirt-1"></div>
+    <div class="shirt-2"></div>
+  </figure>
+</form>
+
+<script type="text/javascript">
+
+
+        function getDate() {
+            var postData = {
+            snum : $("#snum").val(),
+            password : $("#password").val(),
+        
+        }
+
+
+           var temp = '';
+            $.ajax({
+                type: "post",
+                url: "http://111.229.134.150:9080/StudentManage/login",
+                data:postData,
+                dataType: "json",
+                success: function(res) {
+                    var list = res.result
+                    console.log(list);
+                    console.log(postData)
+                    if(list==1){
+                        alert("登录成功");
+                    }
+                    else if(list==11){
+                        alert("管理员登录");
+                    }
+                    else if(list==2){
+                        alert("密码错误");
+                    }
+                    else if(list==3){
+                        alert("该学号不存在");
+                    }
+                }
+            });
+        }
+
+        </script>
+
+  
+</body>
+</html>
